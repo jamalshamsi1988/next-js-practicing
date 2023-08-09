@@ -19,6 +19,11 @@ export default function handler(req, res){
        });
     }else if(req.method === "DELETE"){
         res.status(200).json({message : "All Todos Deleted" , data : []});
+    }else if(req.method === "PUT"){
+        res.status(200).json({
+            message : "Replace all tdodos",
+            data : res.body
+        });
     }
 
 }

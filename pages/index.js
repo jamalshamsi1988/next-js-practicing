@@ -9,11 +9,11 @@ export default function Home() {
 
   useEffect(()=>{
     async function fetchData(){
-        const res = await fetch("/api/todos");
+        const res = await fetch("/api/todos")
         const data = await res.json();
 
         setTodos(data);
-        console.log(data)
+        // console.log(data)
     }
     fetchData()
   },[]);
@@ -34,9 +34,22 @@ export default function Home() {
       })
       const data = (await res).json();
       setTodos(data.data);
-      console.log(data)
+      // console.log(data)
     }
 
+    const replaceHandler = async ()=>{
+      const res= await fetch("/api/todos",{
+        method :"PUT",
+        body :JSON.stringify([
+          {id:7 , title : "todod 7"},
+        {id:8 , title : "todod 8"},
+      ]),
+      headers : {"Content-Type" : "application/json"},
+      });
+      const data =await res.json();
+      setTodos(data.data);
+      console.log(data)
+    }
   return (
     <div className={styles.container}>
      <h1>To Do's Page</h1>
@@ -51,6 +64,9 @@ export default function Home() {
         </div>
         <div>
           <button onClick={deleteHandler}>Delete All</button>
+        </div>
+        <div>
+          <button onClick={replaceHandler}>Replace All</button>
         </div>
     </div>
   )
