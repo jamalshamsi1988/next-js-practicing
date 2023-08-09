@@ -25,6 +25,15 @@ export default function Home() {
         headers : {'Content-Type' : 'application/json'},
       });
       const data = (await res).json();
+      // console.log(data)
+    }
+
+    const deleteHandler =async ()=>{
+      const res=fetch('/api/todos',{
+        method : "DELETE",
+      })
+      const data = (await res).json();
+      setTodos(data.data);
       console.log(data)
     }
 
@@ -39,6 +48,9 @@ export default function Home() {
         <div>
           <input value={todo} onChange={(e)=> setTodo(e.target.value)}/>
           <button onClick={clickHandler}>Add New To Do</button>
+        </div>
+        <div>
+          <button onClick={deleteHandler}>Delete All</button>
         </div>
     </div>
   )
