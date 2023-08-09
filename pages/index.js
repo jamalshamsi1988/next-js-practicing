@@ -16,16 +16,17 @@ export default function Home() {
         console.log(data)
     }
     fetchData()
-  },[])
-    const clickHandler = async() =>{
-      const res = fetch("/api/todos" , {
-        method :"POST",
-        body : JSON.stringify({todo}),
-        headers : {'Content-type': 'application/json'} ,
-      });
-      const data= await res.json();
-    }
+  },[]);
 
+    const clickHandler = async() =>{
+      const res=fetch("/api/todos",{
+        method : "POST",
+        body : JSON.stringify({todo}),
+        headers : {'Content-Type' : 'application/json'},
+      });
+      const data = (await res).json();
+      console.log(data)
+    }
 
   return (
     <div className={styles.container}>

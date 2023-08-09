@@ -12,10 +12,10 @@ export default function handler(req, res){
         const newTodo ={
             id : todos.length + 1 ,
             title : todo,
-        }
+        };
        res.status(201).json({
-        message :"Succes",
-        data : newTodo
+        message :"Success",
+        data : newTodo,
        });
     }
 
