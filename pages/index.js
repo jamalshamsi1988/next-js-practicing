@@ -27,6 +27,7 @@ export default function Home() {
         headers : {'Content-Type' : 'application/json'},
       });
       const data = (await res).json();
+      setTodos(data.data)
       // console.log(data)
     }
 
@@ -49,7 +50,7 @@ export default function Home() {
       headers : {"Content-Type" : "application/json"},
       });
       const data =await res.json();
-      setTodos(data);
+      setTodos(data.data);
       // console.log(data)
     }
 
