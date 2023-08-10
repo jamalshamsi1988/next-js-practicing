@@ -5,7 +5,9 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
 
   const[todos , setTodos]=useState([]);
-  const[todo , setTodo]=useState("");
+  const[todo , setTodo]=useState([]);
+  const[id , setId]=useState("");
+  const[title , setTitle]=useState("");
 
   useEffect(()=>{
     async function fetchData(){
@@ -47,9 +49,21 @@ export default function Home() {
       headers : {"Content-Type" : "application/json"},
       });
       const data =await res.json();
-      setTodos(data.data);
-      console.log(data)
+      setTodos(data);
+      // console.log(data)
     }
+
+    const editHandler= async ()=>{
+      const res = await fetch(`/api/todos/${id}`,{
+        method : "PATCH",
+        body : JSON.stringify({title}),
+        headers :{"Content-Type" : "application/json"},
+      });
+      const data = await res.json();
+      setTodos(data);
+      
+    }
+
   return (
     <div className={styles.container}>
      <h1>To Do's Page</h1>
@@ -67,6 +81,11 @@ export default function Home() {
         </div>
         <div>
           <button onClick={replaceHandler}>Replace All</button>
+        </div>
+        <div>
+          <input placeholder='id' value={id} onChange={e => setId(e.target.value)} />
+          <input placeholder='title' value={title} onChange={e => setTitle(e.target.value)} />
+          <button onClick={editHandler}>Edit</button>
         </div>
     </div>
   )
